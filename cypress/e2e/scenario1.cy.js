@@ -2,7 +2,7 @@
 describe('Correct home page layout', () => {
 
   beforeEach (() => {
-    cy.visit("https://trytestingthis.netlify.app/")
+    cy.visit("/")
   })
 
     it('Correct text in the title and header', () => {
