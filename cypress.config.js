@@ -6,7 +6,6 @@ module.exports = defineConfig({
       // implement node event listeners here
     },
     baseUrl: 'https://trytestingthis.netlify.app/',
-    watchForFileChanges: false,
-    experimentalModifyObstructiveThirdPartyCode: true
+    watchForFileChanges: false
   },
 });
