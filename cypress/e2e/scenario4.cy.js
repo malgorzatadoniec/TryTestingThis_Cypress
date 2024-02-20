@@ -4,30 +4,25 @@ describe('Verify if section “This is your layout one” contains of every requ
       cy.visit("/")
     })
   
-      it('Clicking on button “Your Sample Alert Button!” and choosing "OK"', () => {
+      it.only('Clicking on button “Your Sample Alert Button!” and choosing "OK"', () => {
         cy.get('.pop-up-alert > button').click()
-        cy.on('window:alert',(txt)=>{
-            expect(txt).to.contains('Press a button!');
-        })
+        cy.buttonWindow()
         cy.get('.pop-up-alert > #demo').should('contain', 'You Pressed the OK Button!')
     })
 
-    it('Clicking on button “Your Sample Alert Button!” and choosing "Cancel"', () => {
+    it.only('Clicking on button “Your Sample Alert Button!” and choosing "Cancel"', () => {
         cy.get('.pop-up-alert > button').click()
-        cy.on('window:alert',(txt)=>{
-            expect(txt).to.contains('Press a button!');
-        })
+        cy.buttonWindow()
         cy.on('window:confirm',function(alert){
             return false;
         })
         cy.get('.pop-up-alert > #demo').should('contain', 'You pressed the Cancel Button!')
     })
 
-    // do poprawy
-    // it('After hovering over tooltip area correct textbox shows up', () => {
-    //     cy.get('.tooltip').trigger('mouseover')
-    //     cy.get('.tooltiptext').should('be.visible').and('have,text', 'This is your Sample Tooltip Text') 
-    // })
+    it('After hovering over tooltip area correct textbox shows up', () => {
+        cy.get('.tooltip').trigger('mouseover')
+        cy.get('.tooltiptext').should('be.visible').and('contain', 'This is your Sample Tooltip Text') 
+    })
 
     it('A sample image has correct title', () => {
         cy.get('.side > h4').should('be.visible').and('have.text', 'This is your sample photo')
@@ -86,13 +81,12 @@ describe('Verify if section “This is your layout one” contains of every requ
         cy.get('.side > fieldset > legend').should('exist').and('have.text', 'This is your Sample login page:')
     })
 
-    // do poprawy
-    // it.only('Verify if login form has correct description', () => {
-    //     cy.get('fieldset > h5').should('contain', 'Enter')
-    //     cy.get('fieldset > h5').should('contain', 'Username:test')
-    //     cy.get('fieldset > h5').should('contain', 'Password:test')
-    //     cy.get('fieldset > h5').should('contain', 'to be directed to a new login page and any other value to display error message')
-    // })
+    it('Verify if login form has correct description', () => {
+        cy.get('fieldset > h5').should('contain', 'Enter')
+        cy.get('fieldset > h5').should('contain', 'Username:test')
+        cy.get('fieldset > h5').should('contain', 'Password:test')
+        cy.get('fieldset > h5').should('contain', 'to be directed to a new login page and any other value to display error message')
+    })
 
     it('Verify if the login form has all required elements', () => {
         cy.get('[for="uname"]').should('have.text', 'Username:')
