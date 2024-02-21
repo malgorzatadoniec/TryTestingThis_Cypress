@@ -7,6 +7,7 @@ describe('Verify correct layout of main section of home page', () => {
       it('Verify if Form is visible and has correct title', () => {
         cy.get('.main > h4').should('be.visible').and('have.text', 'This is your sample Form')
         cy.get('form > fieldset').should('exist').and('be.visible')
+        cy.get('form > fieldset > legend').should('be.visible').and('have.text', 'This is your form title:')
     })
 
     it('Verify if there is correct text under the Form', () => {
