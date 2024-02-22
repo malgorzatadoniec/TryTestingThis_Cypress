@@ -23,6 +23,12 @@ Cypress.Commands.add('wrongCred', () => {
     cy.url().should('eq', 'https://trytestingthis.netlify.app/')
   })
 
+// scenario7
+
+Cypress.Commands.add('Submit', () => {
+  cy.get('.btn').click()
+})
+
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
