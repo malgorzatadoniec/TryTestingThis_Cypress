@@ -4,13 +4,13 @@ describe('Verify if section “This is your layout one” contains of every requ
       cy.visit("/")
     })
   
-      it.only('Clicking on button “Your Sample Alert Button!” and choosing "OK"', () => {
+    it('Clicking on button “Your Sample Alert Button!” and choosing "OK"', () => {
         cy.get('.pop-up-alert > button').click()
         cy.buttonWindow()
         cy.get('.pop-up-alert > #demo').should('contain', 'You Pressed the OK Button!')
     })
 
-    it.only('Clicking on button “Your Sample Alert Button!” and choosing "Cancel"', () => {
+    it('Clicking on button “Your Sample Alert Button!” and choosing "Cancel"', () => {
         cy.get('.pop-up-alert > button').click()
         cy.buttonWindow()
         cy.on('window:confirm',function(alert){
@@ -20,8 +20,9 @@ describe('Verify if section “This is your layout one” contains of every requ
     })
 
     it('After hovering over tooltip area correct textbox shows up', () => {
+        cy.get('.tooltip').should('be.visible').and('contain', 'This is your Sample Tooltip Option')
         cy.get('.tooltip').trigger('mouseover')
-        cy.get('.tooltiptext').should('be.visible').and('contain', 'This is your Sample Tooltip Text') 
+        cy.get('.tooltiptext').invoke('show').should('exist').and('contain', 'This is your sample Tooltip text')
     })
 
     it('A sample image has correct title', () => {

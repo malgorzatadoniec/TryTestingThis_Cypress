@@ -3,6 +3,11 @@ describe('Verify if all elements of the Form are visible and are working correct
     beforeEach (() => {
       cy.visit("/")
     })
+
+    it('Submit button', () => {
+        cy.get('h6').should('be.visible').and('have.text', 'Clicking the submit button will take you to a new tab')
+        cy.get('.btn').should('exist').and('be.visible')
+    })
   
       it('User input in “First name:” and “Last name:” fields', () => {
         cy.get('[for="fname"]').should('be.visible').and('have.text', 'First name:')
@@ -73,8 +78,8 @@ describe('Verify if all elements of the Form are visible and are working correct
         cy.get(':nth-child(35)').should('be.visible').and('contain', 'Option 1')
         cy.get(':nth-child(38)').should('be.visible').and('contain', 'Option 2')
         cy.get(':nth-child(41)').should('be.visible').and('contain', 'Option 3')
-        cy.get('[name="option1"]').check()
-        cy.get('[name="option2"]').check()
+        cy.get('[name="option1"]').check().should('be.checked')
+        cy.get('[name="option2"]').check().should('be.checked')
     })
 
     it('User chooses multiple options and submits the Form (3 options)', () => {
@@ -111,7 +116,6 @@ describe('Verify if all elements of the Form are visible and are working correct
         cy.url().should('contain', '&Options=Berry&')
     })
     
-
     it('User chooses color', () => {
         cy.get('[for="favcolor"]').should('be.visible').and('have.text', 'Select your favorite color:')
         cy.get('#favcolor').should('exist').and('be.visible').invoke('val', '#D81851')
@@ -131,5 +135,64 @@ describe('Verify if all elements of the Form are visible and are working correct
         cy.get('#a').should('exist').and('be.visible').invoke('val', '86')
         cy.Submit()
         cy.url().should('contain', '&a=86&')
+    })
+
+    it('User uploads a file', () => {
+        cy.get('[for="myfile"]').should('be.visible').and('have.text', 'Select a file:')
+        cy.get('#myfile').should('exist').and('be.visible').selectFile('cypress/fixtures/testFile.txt')
+        cy.Submit()
+        cy.url().should('contain', '&myfile=testFile.txt')
+    })
+
+    it('User selects a number from the range 1-5', () => {
+        cy.get('[for="quantity"]').should('be.visible').and('have.text', 'Select a quantity from a range:')
+        cy.get('#quantity').should('exist').and('be.visible').type(5)
+        cy.Submit()
+        cy.url().should('contain', '&quantity=5')
+    })
+
+    it('User selects a number outside the allowed range (more than 5)', () => {
+        cy.get('#quantity').type(6)
+        cy.Submit()   
+        cy.url().should('not.contain', '&quantity=6') 
+        cy.url().should('contain', 'https://trytestingthis.netlify.app/')
+    })
+
+    it('User selects a number outside the allowed range (less than 1)', () => {
+        cy.get('#quantity').type(-1)
+        cy.Submit()   
+        cy.url().should('not.contain', '&quantity=-1') 
+        cy.url().should('contain', 'https://trytestingthis.netlify.app/')
+    })
+
+    it('User selects a number outside the allowed range (0)', () => {
+        cy.get('#quantity').type(0)
+        cy.Submit()   
+        cy.url().should('not.contain', '&quantity=0') 
+        cy.url().should('contain', 'https://trytestingthis.netlify.app/')
+    })
+
+    it('User types in text area', () => {
+        cy.get('[for="lmsg"]').should('be.visible').and('have.text', 'Long Message:')
+        cy.get('textarea').should('exist').and('be.visible').clear().type('test')
+        cy.Submit()    
+        cy.url().should('contain', '&message=test')
+    })
+
+    it('User clears text area, but does not type any message', () => {
+        cy.get('[for="lmsg"]').should('be.visible').and('have.text', 'Long Message:')
+        cy.get('textarea').should('exist').and('be.visible').clear()
+        cy.Submit()    
+        cy.url().should('contain', '&message=')
+    })
+
+    it('User submits filled form ', () => {
+        cy.visit('/', {
+            onBeforeLoad(win) {
+                cy.stub(win, "open").as("winOpen")
+                },
+            })
+        cy.Submit()
+        cy.get('@winOpen').should('be.calledOnce')
     })
 })
