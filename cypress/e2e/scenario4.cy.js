@@ -7,7 +7,7 @@ describe('Verify if section “This is your layout one” contains of every requ
     it('Clicking on button “Your Sample Alert Button!” and choosing "OK"', () => {
         cy.get('.pop-up-alert > button').click()
         cy.buttonWindow()
-        cy.get('.pop-up-alert > #demo').should('contain', 'You Pressed the OK Button!')
+        cy.get('.pop-up-alert > #demo').should('be.visible').and('contain', 'You Pressed the OK Button!')
     })
 
     it('Clicking on button “Your Sample Alert Button!” and choosing "Cancel"', () => {
@@ -16,7 +16,7 @@ describe('Verify if section “This is your layout one” contains of every requ
         cy.on('window:confirm',function(alert){
             return false;
         })
-        cy.get('.pop-up-alert > #demo').should('contain', 'You pressed the Cancel Button!')
+        cy.get('.pop-up-alert > #demo').should('be.visible').and('contain', 'You pressed the Cancel Button!')
     })
 
     it('After hovering over tooltip area correct textbox shows up', () => {
@@ -34,7 +34,7 @@ describe('Verify if section “This is your layout one” contains of every requ
     })
 
     it('A sample image has correct description', () => {
-        cy.get('.side > :nth-child(6)').should('be.visible').and('contain', 'This is your description of the photo')
+        cy.get('.side > :nth-child(6)').should('be.visible').and('have.text', 'This is your description of the photo')
     })
 
     it('Food icons are visible', () => {
@@ -42,7 +42,7 @@ describe('Verify if section “This is your layout one” contains of every requ
     })
 
     it('Verify if “Double-click me” button has correct description', () => {
-        cy.get('.side > :nth-child(12)').should('be.visible').and('contain', 'This is your sample Double Click')
+        cy.get('.side > :nth-child(12)').should('be.visible').and('have.text', 'This is your sample Double Click')
     })
 
     it('Verify if “Double-click me” button is visible', () => {
@@ -60,8 +60,8 @@ describe('Verify if section “This is your layout one” contains of every requ
     })
 
     it('Verify if elements for drag and drop function have correct captions', () => {
-        cy.get('.side > :nth-child(18)').should('be.visible').and('contain', 'This is your Sample drag and drop')
-        cy.get('.side > :nth-child(19)').should('be.visible').and('contain', 'Drag Pizza into the Pizza box:')
+        cy.get('.side > :nth-child(18)').should('be.visible').and('have.text', 'This is your Sample drag and drop')
+        cy.get('.side > :nth-child(19)').should('be.visible').and('have.text', 'Drag Pizza into the Pizza box:')
     })
 
     it('Verify if drag and drop function works correctly when pizza picture is not in the box', () => {
