@@ -1,7 +1,7 @@
 {
   "name": "trytestingthis_cypress",
   "version": "1.0.0",
-  "description": "",
+  "description": "<p align=\"justify\">This project contains automated test scripts based on <a href=\"https://github.com/malgorzatadoniec/TestScenarios/blob/main/TryTestingThis_TestScenarios.txt\">TestScenarios</a></p>",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cypress": "^13.6.4"
+    "cypress": "^13.6.6"
   },
   "devDependencies": {
     "@4tw/cypress-drag-drop": "^2.2.5"
