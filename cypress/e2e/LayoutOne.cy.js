@@ -6,13 +6,13 @@ describe('Verify if section “This is your layout one” contains of every requ
   
     it('Clicking on button “Your Sample Alert Button!” and choosing "OK"', () => {
         cy.get('.pop-up-alert > button').click()
-        cy.buttonWindow()
+        cy.ConfirmTextInWindow()
         cy.get('.pop-up-alert > #demo').should('be.visible').and('contain', 'You Pressed the OK Button!')
     })
 
     it('Clicking on button “Your Sample Alert Button!” and choosing "Cancel"', () => {
         cy.get('.pop-up-alert > button').click()
-        cy.buttonWindow()
+        cy.ConfirmTextInWindow()
         cy.on('window:confirm',function(alert){
             return false;
         })

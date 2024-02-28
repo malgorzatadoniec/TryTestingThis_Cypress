@@ -1,7 +1,7 @@
 describe('Verify if links on contact page work as expected', () => {
 
     beforeEach (() => {
-      cy.visit('https://trytestingthis.netlify.app/contact')
+      cy.visit('/contact')
     })
 
     it('GitHub link', () => {

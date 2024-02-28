@@ -2,20 +2,20 @@ require('@4tw/cypress-drag-drop')
 
 //scenario4
 
-Cypress.Commands.add('buttonWindow', () => {
+Cypress.Commands.add('ConfirmTextInWindow', () => {
 cy.on('window:confirm',(txt)=>{
   expect(txt).to.contains('Press a button!');
   })
 })
 
 // scenario5
-Cypress.Commands.add('LogIn', () => {
-    cy.get('#uname').type('test')
-    cy.get('#pwd').type('test')
+Cypress.Commands.add('LogIn', (username, password) => {
+    cy.get('#uname').type(username)
+    cy.get('#pwd').type(password)
     cy.get('[type="submit"]').click()
   })
 
-Cypress.Commands.add('wrongCred', () => {
+Cypress.Commands.add('SubmittingWrongCred', () => {
     cy.get('[type="submit"]').click()
     cy.on('window:confirm',(text)=>{
       expect(text).to.contains('Wrong Credentials! Try again!')

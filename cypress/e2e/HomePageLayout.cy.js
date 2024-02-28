@@ -24,7 +24,7 @@ describe('Correct home page layout', () => {
       cy.get('.side').should('be.visible').and('contain', 'This is your layout one')
   })
 
-    it.only('Correct text in footer', () => {
+    it('Correct text in footer', () => {
       cy.get('.footer').should('be.visible')
       cy.get('.footer > :nth-child(1)').should('be.visible').and('have.text', 'Created by Oviya Kandaswamy')
       cy.get('.footer > :nth-child(2)').should('be.visible').and('have.text', 'Thank you for using this Website :)')
